@@ -9,7 +9,7 @@ function createCacheInvalidator(runNext,isFunction,isDefinedAndNotNull) {
     this.cache = cache;
     this.job_interval = job_interval;
     this.maxAge = maxAge;
-    this.prefix = prefix; 
+    this.prefix = prefix || null; 
     this.aged = [];
     this.doCronJob();
   }
@@ -39,7 +39,7 @@ function createCacheInvalidator(runNext,isFunction,isDefinedAndNotNull) {
     var ret;
     var content = item.content;
     var timestamp = item.timestamp;
-    if (name.indexOf(this.prefix) !== 0){
+    if (!!this.prefix && name.indexOf(this.prefix) !== 0){
       return;
     }
     if (!content || !timestamp){
