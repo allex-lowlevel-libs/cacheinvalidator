@@ -22,28 +22,35 @@ function createCacheInvalidator(runNext,isFunction,isDefinedAndNotNull) {
   };
 
   CacheInvalidator.prototype.doAging = function(item,name){
-    if (!isDefinedAndNotNull(item.age)) item.age = 0;
-    item.age++;
-    if (item.age >= this.maxAge){
-      this.aged.push(name);
-      //NOT DESTROYING!
-      /*
-      if (isFunction(item.destroy)){
-        item.destroy();
+    if (typeof item != 'object'){
+      var ageObj = this.cache.get(name+'_age');
+      if (!isDefinedAndNotNull(ageObj)){
+        ageObj = {age:1};
+        this.cache.add(name+'_age',ageObj);
       }
-      */
+      if (ageObj.age >= this.maxAge){
+        this.aged.push(name);
+      }
+    }else{
+      if (!isDefinedAndNotNull(item.age)) item.age = 0;
+      item.age++;
+      if (item.age >= this.maxAge){
+        this.aged.push(name);
+        //NOT DESTROYING!
+        /*
+        if (isFunction(item.destroy)){
+          item.destroy();
+        }
+        */
+      }
     }
   };
 
   CacheInvalidator.prototype.invalidateCacheEntry = function(item,name,map){
-    var ret;
     var content = item.content;
     var timestamp = item.timestamp;
     if (!!this.prefix && name.indexOf(this.prefix) !== 0){
       return;
-    }
-    if (!content || !timestamp){
-      return false;
     }
     this.doAging(item,name);
     return true;
