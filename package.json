@@ -1,0 +1,26 @@
+{
+  "name": "allex_cacheinvalidatorlowlevellib",
+  "version": "1.0.0",
+  "description": "AllexJS invalidator for a Cache",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allex-lowlevel-libs/cacheinvalidator.git"
+  },
+  "keywords": [
+    "ecosystem:AllexJS",
+    "cache",
+    "invalidator",
+    "lowlevel",
+    "lib"
+  ],
+  "author": "Luka Petrovic <lukapetrovicsi@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allex-lowlevel-libs/cacheinvalidator/issues"
+  },
+  "homepage": "https://github.com/allex-lowlevel-libs/cacheinvalidator#readme"
+}
