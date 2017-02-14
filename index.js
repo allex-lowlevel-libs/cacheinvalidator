@@ -47,10 +47,12 @@ function createCacheInvalidator(runNext,isFunction,isDefinedAndNotNull) {
   };
 
   CacheInvalidator.prototype.invalidateCacheEntry = function(item,name,map){
+    //console.log('Taman da vidimo CACHE ENTRY name : ' + name + '\nitem : ' + item);
+    //console.log('Taman da vidimo CACHE ENTRY name : ' + name + '\nitem : ' + require('util').inspect(item,{depth:5}));
     var content = item.content;
     var timestamp = item.timestamp;
     if (!!this.prefix && name.indexOf(this.prefix) !== 0){
-      return;
+      return false;
     }
     this.doAging(item,name);
     return true;
